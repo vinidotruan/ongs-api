@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Models\User;
 use App\Services\Users\UserCreationService;
 use Exception;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
 
     public function __construct(private readonly UserCreationService $userCreationService)
@@ -19,9 +20,8 @@ class LoginController extends Controller
     /**
      * @throws Exception
      */
-    public function register(Request $request): JsonResponse
+    public function register(RegisterUserRequest $request): JsonResponse
     {
-
         $this->userCreationService->setData($request->all());
         $this->userCreationService->setPassword($request->get("password"));
 

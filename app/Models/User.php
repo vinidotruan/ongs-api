@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Ong::class);
     }
+
+    public function custumer(): HasOne
+    {
+        return $this->hasOne(Custumer::class);
+    }
 }
