@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\CustumerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OngController;
@@ -21,7 +22,8 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::apiResource('ongs', OngController::class)->middleware('auth:sanctum');
-Route::apiResource('clients', CustumerController::class)->middleware('auth:sanctum');
+Route::apiResource('custumers', CustumerController::class)->middleware('auth:sanctum');
+Route::apiResource('animals', AnimalController::class)->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
