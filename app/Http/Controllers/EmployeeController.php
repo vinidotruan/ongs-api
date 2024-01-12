@@ -47,7 +47,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function destroy(Employee $employee)
+    public function destroy(Employee $employee): JsonResponse
     {
         $employee->delete();
         return response()->json([

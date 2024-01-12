@@ -13,7 +13,7 @@ class UserCreationService {
     private array $data;
     private string $password;
 
-    public function __construct(private User $user)
+    public function __construct(private readonly User $user)
     {
     }
 

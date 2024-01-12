@@ -2,6 +2,7 @@
 
 namespace App\Services\Employees;
 
+use App\Models\Employee;
 use App\Models\Ong;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,10 @@ class EmployeeCreationService extends BaseService
 {
     private array $data;
     private Ong $ong;
+
+    public function __construct(private readonly Employee $employee)
+    {
+    }
     public function setData(array $data): void
     {
         $this->data = $data;
@@ -24,15 +29,17 @@ class EmployeeCreationService extends BaseService
     {
         try {
             DB::beginTransaction();
-            $this->data = [
-                ...$this->data,
-                'password' => $this->data['cpf'],
+            $employee = $this->employee->replicate();
+            $employee->fill([...$this->data,
                 'user_id' => auth()->user()->id,
                 'ongs_id' => $this->ong->id
-            ];
+            ]);
 
-            $employee = $this->ong->employees()->create($this->data);
-            $employee->user()->create($this->data);
+            $employee = $this->ong->employees()->create($employee->toArray());
+            $employee->user()->create([
+                "email" => $this->data["email"], "password" => $this->data["cpf"]
+            ]);
+
             DB::commit();
             return $employee;
         } catch (\Throwable $th) {
