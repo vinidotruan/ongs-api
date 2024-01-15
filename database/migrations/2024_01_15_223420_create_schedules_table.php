@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime("start");
             $table->unsignedInteger("duration");
-            $table->foreignId("employee_id")->constrained("employees");
+            $table->foreignId("employee_service_id")->constrained("employee_service_provided");
             $table->timestamps();
         });
     }

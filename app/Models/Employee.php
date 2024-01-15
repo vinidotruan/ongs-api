@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Employee extends Model
 {
     use HasFactory;
+    protected $with = ['servicesProvided'];
 
     protected $guarded = ['id'];
 
@@ -26,6 +27,6 @@ class Employee extends Model
 
     public function servicesProvided(): BelongsToMany
     {
-        return $this->belongsToMany(ServiceProvided::class, 'employee_service_provided', 'employee_id', 'service_provided_id');
+        return $this->belongsToMany(ServiceProvided::class, 'employee_service_provided', 'employee_id', 'service_provided_id')->withPivot('id');
     }
 }

@@ -24,7 +24,7 @@ class AddEmployeeServiceProvidedRequest extends FormRequest
     {
         return [
             "employee_id" => ["required", "exists:employees,id"],
-            "service_provided_id" => ["required", "exists:services_provided,id", 'in:' . $this->route('id')],
+            "service_provided_id" => ["required", "exists:services_provided,id"],
         ];
     }
 }

@@ -25,6 +25,8 @@ class StoreScheduleRequest extends FormRequest
         return [
             "start" => ["required", "date"],
             "duration" => ["required", "integer", "min:1"],
+            "employee_id" => ["required", "integer", "exists:employees,id"],
+            "service_id" => ["required", "integer", "exists:services_provided,id"],
         ];
     }
 }
