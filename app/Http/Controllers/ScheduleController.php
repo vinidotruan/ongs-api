@@ -19,14 +19,13 @@ class ScheduleController extends Controller
         return response()->json(["data" => auth()->user()->employee->schedules()->get()]);
     }
 
-    public function store(StoreScheduleRequest $request)
+    public function store(StoreScheduleRequest $request): JsonResponse
     {
         $this->creationScheduleService->setData($request->all());
-        $schedule = $this->creationScheduleService->handle();
-        return response()->json(["data" => $schedule], 201);
+        return response()->json(["data" => $this->creationScheduleService->handle()], 201);
     }
 
-    public function show(Schedule $schedule)
+    public function show(Schedule $schedule): JsonResponse
     {
         return response()->json(["data" => $schedule]);
     }
@@ -36,9 +35,9 @@ class ScheduleController extends Controller
         return response()->json(["data" => $schedule->update($request->all())]);
     }
 
-    public function destroy(Schedule $schedule)
+    public function destroy(Schedule $schedule): JsonResponse
     {
-       $schedule->delete();
-         return response()->json([], 204);
+        $schedule->delete();
+        return response()->json([], 204);
     }
 }
