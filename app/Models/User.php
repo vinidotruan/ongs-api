@@ -50,9 +50,9 @@ class User extends Authenticatable
         return $this->hasOne(Ong::class);
     }
 
-    public function custumer(): HasOne
+    public function customer(): HasOne
     {
-        return $this->hasOne(Custumer::class);
+        return $this->hasOne(Customer::class);
     }
 
     public function employee(): HasOne

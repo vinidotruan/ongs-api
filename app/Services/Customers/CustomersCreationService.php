@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Custumers;
+namespace App\Services\Customers;
 
-use App\Models\Custumer;
+use App\Models\Customer;
 use App\Services\BaseService;
 
-class CustumersCreationService extends BaseService
+class CustomersCreationService extends BaseService
 {
     private array $data;
 
@@ -14,9 +14,9 @@ class CustumersCreationService extends BaseService
         $this->data = $data;
     }
 
-    public function handle(): Custumer
+    public function handle(): Customer
     {
         $this->data['user_id'] = auth()->user()->id;
-        return Custumer::create($this->data);
+        return Customer::create($this->data);
     }
 }

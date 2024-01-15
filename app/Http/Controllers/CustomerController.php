@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Custumers\StoreCustumerRequest;
-use App\Models\Custumer;
-use App\Services\Custumers\CustumersCreationService;
+use App\Http\Requests\Customers\StoreCustomerRequest;
+use App\Models\Customer;
+use App\Services\Customers\CustomersCreationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CustumerController extends Controller
+class CustomerController extends Controller
 {
 
-    public function __construct(private readonly CustumersCreationService $clientsCreationService)
+    public function __construct(private readonly CustomersCreationService $clientsCreationService)
     {
     }
 
@@ -19,12 +19,12 @@ class CustumerController extends Controller
     public function index(): JsonResponse
     {
         return response()->json([
-            'data' => auth()->user()->custumer()->get()
+            'data' => auth()->user()->customer()->get()
         ]);
     }
 
 
-    public function store(StoreCustumerRequest $request): JsonResponse
+    public function store(StoreCustomerRequest $request): JsonResponse
     {
         $this->clientsCreationService->setData($request->all());
         return response()->json([
@@ -33,7 +33,7 @@ class CustumerController extends Controller
     }
 
 
-    public function show(Custumer $client): JsonResponse
+    public function show(Customer $client): JsonResponse
     {
         return response()->json([
             'data' => $client
@@ -41,7 +41,7 @@ class CustumerController extends Controller
     }
 
 
-    public function update(Request $request, Custumer $client): JsonResponse
+    public function update(Request $request, Customer $client): JsonResponse
     {
         $client->update($request->all());
         return response()->json([
@@ -50,7 +50,7 @@ class CustumerController extends Controller
     }
 
 
-    public function destroy(Custumer $client)
+    public function destroy(Customer $client)
     {
         $client->delete();
         return response()->json([

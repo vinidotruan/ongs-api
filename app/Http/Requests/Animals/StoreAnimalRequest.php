@@ -27,7 +27,7 @@ class StoreAnimalRequest extends FormRequest
             "breed" => ["required", "string"],
             "birthday" => ["required", "date"],
             "weight" => ["required", "numeric"],
-            "custumer_id" => ["required", "integer", "exists:custumers,id"],
+            "customer_id" => ["required", "integer", "exists:customers,id"],
         ];
     }
 }

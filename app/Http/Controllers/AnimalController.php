@@ -18,7 +18,7 @@ class AnimalController extends Controller
     public function index(): JsonResponse
     {
        return response()->json([
-           'data' => auth()->user()->custumer->animals
+           'data' => auth()->user()->customer->animals
        ]);
     }
 

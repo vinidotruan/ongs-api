@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("breed");
             $table->date("birthday");
             $table->unsignedDouble("weight");
-            $table->foreignId("custumer_id")->constrained('custumers');
+            $table->foreignId("customer_id")->constrained('customers');
             $table->timestamps();
         });
     }

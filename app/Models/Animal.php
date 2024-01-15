@@ -14,6 +14,6 @@ class Animal extends Model
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(Custumer::class);
+        return $this->belongsTo(Customer::class);
     }
 }

@@ -27,7 +27,7 @@ class AnimalsCreationService extends BaseService
             $animal = $this->animal->replicate();
             $animal->fill([
                 ...$this->data,
-                'custumer_id' => auth()->user()->custumer->id
+                'customer_id' => auth()->user()->customer->id
             ]);
 
             $animal->save();
