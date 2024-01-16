@@ -14,14 +14,21 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::apiResource('ongs', OngController::class)->middleware('auth:sanctum');
-Route::apiResource('customers', CustomerController::class)->middleware('auth:sanctum');
-Route::apiResource('animals', AnimalController::class)->middleware('auth:sanctum');
-Route::apiResource('appointments', AppointmentController::class)->middleware('auth:sanctum');
-Route::apiResource('employees', EmployeeController::class)->middleware('auth:sanctum');
-Route::apiResource('schedules', ScheduleController::class)->middleware('auth:sanctum');
-Route::apiResource('services-provided', ServiceProvidedController::class)->middleware('auth:sanctum');
-Route::post('services-provided/{serviceProvided}/employees/{employee}', [ServiceProvidedController::class, 'addEmployee'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function() {
+    Route::apiResources([
+        'ongs' => OngController::class,
+        'animals' => AnimalController::class,
+        'appointments' => AppointmentController::class,
+        'employees' => EmployeeController::class,
+        'schedules' => ScheduleController::class,
+        'services-provided' => ServiceProvidedController::class,
+    ]);
+
+    Route::post('services-provided/{serviceProvided}/employees/{employee}', [ServiceProvidedController::class, 'addEmployee']);
+    Route::apiResource('customers', CustomerController::class)->except(['store']);;
+});
+
+Route::post('/customers', [CustomerController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

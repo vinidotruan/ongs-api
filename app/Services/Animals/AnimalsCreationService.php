@@ -22,21 +22,7 @@ class AnimalsCreationService extends BaseService
 
     public function handle()
     {
-        try {
-            DB::beginTransaction();
-            $animal = $this->animal->replicate();
-            $animal->fill([
-                ...$this->data,
-                'customer_id' => auth()->user()->customer->id
-            ]);
-
-            $animal->save();
-            DB::commit();
-            return $animal;
-        } catch (Exception $exception) {
-            DB::rollBack();
-            throw $exception;
-        }
+        return DB::transaction(fn() => $this->animal->create([...$this->data, 'customer_id' => auth()->user()->customer->id]));
 
     }
 }

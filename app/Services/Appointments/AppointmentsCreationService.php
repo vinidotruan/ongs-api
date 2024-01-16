@@ -24,13 +24,6 @@ class AppointmentsCreationService extends BaseService
      */
     public function handle()
     {
-        try {
-            DB::beginTransaction();
-            $response = $this->appointments->create($this->data);
-            DB::commit();
-            return $response;
-        } catch (Exception $exception) {
-            throw new Exception($exception->getMessage());
-        }
+        return DB::transaction(fn() => $this->appointments->create($this->data) );
     }
 }

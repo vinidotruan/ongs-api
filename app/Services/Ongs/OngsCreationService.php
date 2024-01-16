@@ -25,21 +25,6 @@ class OngsCreationService extends BaseService
      */
     public function handle()
     {
-        try {
-            DB::beginTransaction();
-            $ong = $this->ong->replicate();
-            $ong->fill([
-                ...$this->data,
-                'user_id' => auth()->user()->id
-            ]);
-            $ong->save();
-            DB::commit();
-            return $ong;
-
-        } catch (Exception $exception) {
-            DB::rollBack();
-            throw $exception;
-        }
-
+        return DB::transaction(fn () => $this->ong->create([...$this->data, 'user_id' => auth()->user()->id]));
     }
 }

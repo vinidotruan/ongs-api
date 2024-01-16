@@ -26,6 +26,8 @@ class StoreCustomerRequest extends FormRequest
             "name" => ["required", "string"],
             "cpf" => ["required", "string"],
             "whatsapp" => ["required", "string"],
+            "email" => ["required", "email", "unique:users"],
+            "password" => ["required", "min:8"],
         ];
     }
 }

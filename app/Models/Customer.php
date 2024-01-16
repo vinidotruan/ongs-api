@@ -11,7 +11,7 @@ class Customer extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ["name", "cpf", "whatsapp", "user_id"];
 
     public function user(): BelongsTo
     {

@@ -28,16 +28,8 @@ class ServiceProvidedCreationService extends BaseService
      */
     public function handle()
     {
-        try {
-            DB::beginTransaction();
-            $serviceProvided = $this->serviceProvided->create([
-                'name' => $this->name
-            ]);
-            DB::commit();
-            return $serviceProvided;
-        } catch (Exception $exception) {
-            DB::rollback();
-            throw $exception;
-        }
+        return DB::transaction(function() {
+            return $this->serviceProvided->create(['name' => $this->name]);
+        });
     }
 }

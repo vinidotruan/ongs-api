@@ -39,14 +39,8 @@ class UserCreationService {
      */
     public function handle(): User
     {
-        try {
-            DB::beginTransaction();
-            $user = $this->user->create([...$this->data, "password" => $this->password]);
-            DB::commit();
-            return $user;
-        } catch (Exception $exception) {
-            DB::rollBack();
-            throw $exception;
-        }
+        return DB::transaction(function() {
+            return $this->user->create([...$this->data, "password" => $this->password]);
+        });
     }
 }

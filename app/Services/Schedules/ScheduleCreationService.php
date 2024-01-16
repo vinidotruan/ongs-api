@@ -26,17 +26,11 @@ class ScheduleCreationService extends BaseService
      */
     public function handle()
     {
-        try {
+        return DB::transaction(function() {
             $employee = Employee::find($this->data['employee_id']);
             $service = $employee->servicesProvided()->find($this->data['service_id']);
 
-            DB::beginTransaction();
-            $response = $this->schedule->create([...$this->data, "employee_service_id" => $service->pivot->id]);
-            DB::commit();
-            return $response;
-        } catch (Exception $exception) {
-            DB::rollBack();
-            throw $exception;
-        }
+            return $this->schedule->create([...$this->data, "employee_service_id" => $service->pivot->id]);
+        });
     }
 }
