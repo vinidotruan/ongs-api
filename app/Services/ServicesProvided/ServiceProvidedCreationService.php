@@ -7,7 +7,7 @@ use App\Services\BaseService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class CreationServiceProvidedService extends BaseService
+class ServiceProvidedCreationService extends BaseService
 {
     private string $name;
 

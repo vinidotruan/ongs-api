@@ -2,49 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAppointmentRequest;
-use App\Http\Requests\UpdateAppointmentRequest;
+use App\Http\Requests\Appointments\StoreAppointmentRequest;
+use App\Http\Requests\Appointments\UpdateAppointmentRequest;
 use App\Models\Appointment;
+use App\Services\Appointments\AppointmentsCreationService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(private readonly AppointmentsCreationService $creationService)
     {
-        //
+    }
+    public function index(): JsonResponse
+    {
+        $user = auth()->user();
+
+        if($user->employee()->exists()) {
+            $dataGetter = $user->employee;
+        } else {
+            $dataGetter = $user->customer;
+        }
+
+        return response()->json([
+            'data' => $dataGetter->appointments()->with(['animal'])->get()
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @throws Exception
      */
-    public function store(StoreAppointmentRequest $request)
+    public function store(StoreAppointmentRequest $request): JsonResponse
     {
-        //
+        $this->creationService->setData($request->all());
+        return response()->json([
+            'data' => $this->creationService->handle()
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Appointment $appointment)
+    public function show(Appointment $appointment): JsonResponse
     {
-        //
+        return response()->json([
+            'data' => $appointment->load(['animal'])
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAppointmentRequest $request, Appointment $appointment)
+    public function update(UpdateAppointmentRequest $request, Appointment $appointment): JsonResponse
     {
-        //
+        $appointment->update($request->all());
+        return response()->json([
+            'data' => $appointment->load(['animal'])
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Appointment $appointment)
+    public function destroy(Appointment $appointment): JsonResponse
     {
-        //
+        $appointment->delete();
+        return response()->json([
+            'data' => $appointment
+        ]);
     }
 }

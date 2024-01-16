@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Employee extends Model
 {
@@ -28,5 +29,17 @@ class Employee extends Model
     public function servicesProvided(): BelongsToMany
     {
         return $this->belongsToMany(ServiceProvided::class, 'employee_service_provided', 'employee_id', 'service_provided_id')->withPivot('id');
+    }
+
+    public function appointments(): HasManyThrough
+    {
+        return $this->HasManyThrough(
+            Appointment::class,
+            EmployeeServiceProvided::class,
+            'employee_id',
+            'employee_service_id',
+            'id',
+            'id'
+        );
     }
 }

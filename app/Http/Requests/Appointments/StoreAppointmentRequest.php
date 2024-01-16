@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Appointments;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAppointmentRequest extends FormRequest
@@ -11,18 +12,20 @@ class StoreAppointmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
+            "employee_service_id" => ["required", "exists:employee_service_provided,id"],
+            "customer_id" => ["required", "exists:customers,id"],
+            "animal_id" => ["required", "exists:animals,id"],
         ];
     }
 }

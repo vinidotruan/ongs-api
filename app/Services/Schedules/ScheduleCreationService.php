@@ -9,14 +9,14 @@ use App\Services\BaseService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class CreationScheduleService extends BaseService
+class ScheduleCreationService extends BaseService
 {
     private array $data;
     public function __construct(private readonly Schedule $schedule)
     {
     }
 
-    public function setData(array $data): self
+    public function setData(array $data): void
     {
         $this->data = $data;
     }

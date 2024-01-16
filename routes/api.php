@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
@@ -16,6 +17,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::apiResource('ongs', OngController::class)->middleware('auth:sanctum');
 Route::apiResource('customers', CustomerController::class)->middleware('auth:sanctum');
 Route::apiResource('animals', AnimalController::class)->middleware('auth:sanctum');
+Route::apiResource('appointments', AppointmentController::class)->middleware('auth:sanctum');
 Route::apiResource('employees', EmployeeController::class)->middleware('auth:sanctum');
 Route::apiResource('schedules', ScheduleController::class)->middleware('auth:sanctum');
 Route::apiResource('services-provided', ServiceProvidedController::class)->middleware('auth:sanctum');

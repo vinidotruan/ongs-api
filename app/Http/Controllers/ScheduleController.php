@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Schedules\StoreScheduleRequest;
 use App\Http\Requests\Schedules\UpdateScheduleRequest;
 use App\Models\Schedule;
-use App\Services\Schedules\CreationScheduleService;
+use App\Services\Schedules\ScheduleCreationService;
 use Illuminate\Http\JsonResponse;
 
 class ScheduleController extends Controller
 {
-    public function __construct(private readonly CreationScheduleService $creationScheduleService)
+    public function __construct(private readonly ScheduleCreationService $creationScheduleService)
     {
     }
 

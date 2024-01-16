@@ -7,14 +7,14 @@ use App\Http\Requests\ServicesProvided\StoreServiceProvidedRequest;
 use App\Http\Requests\ServicesProvided\UpdateServiceProvidedRequest;
 use App\Models\Employee;
 use App\Models\ServiceProvided;
-use App\Services\ServicesProvided\CreationServiceProvidedService;
+use App\Services\ServicesProvided\ServiceProvidedCreationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
 class ServiceProvidedController extends Controller
 {
 
-    public function __construct(private readonly CreationServiceProvidedService $creationServiceProvided)
+    public function __construct(private readonly ServiceProvidedCreationService $creationServiceProvided)
     {
     }
 
