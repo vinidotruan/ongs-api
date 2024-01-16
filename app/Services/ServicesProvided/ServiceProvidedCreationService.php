@@ -35,9 +35,9 @@ class ServiceProvidedCreationService extends BaseService
             ]);
             DB::commit();
             return $serviceProvided;
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             DB::rollback();
-            throw new Exception($e->getMessage());
+            throw $exception;
         }
     }
 }

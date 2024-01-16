@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\ServiceProvided;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ServiceProvided>
+ * @extends Factory<ServiceProvided>
  */
 class ServiceProvidedFactory extends Factory
 {
@@ -17,7 +18,7 @@ class ServiceProvidedFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "name" => $this->faker->colorName()
         ];
     }
 }

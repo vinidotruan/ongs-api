@@ -41,13 +41,7 @@ class UserCreationService {
     {
         try {
             DB::beginTransaction();
-
-            $data = [...$this->data, "password" => $this->password];
-            $user = $this->user->replicate();
-
-            $user->fill($data);
-            $user->save();
-
+            $user = $this->user->create([...$this->data, "password" => $this->password]);
             DB::commit();
             return $user;
         } catch (Exception $exception) {
