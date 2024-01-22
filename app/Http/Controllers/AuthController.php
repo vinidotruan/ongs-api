@@ -27,6 +27,7 @@ class AuthController extends Controller
 
         $user = $this->userCreationService->handle();
         $token = $user->createToken('auth_token')->plainTextToken;
+        Log::info('register user: ' . $request->email);
 
         return response()->json([
             'data' => [
@@ -36,25 +37,25 @@ class AuthController extends Controller
         ]);
     }
 
-        public function login(Request $request): JsonResponse
-        {
-            Log::info('login user: ' . $request->email);
+    public function login(Request $request): JsonResponse
+    {
+        Log::info('login user: ' . $request->email);
 
-            if (! Auth::attempt($request->only('email', 'password'))) {
-                return response()->json('Unauthorized', 401);
-            }
-
-            $user = User::where('email', $request['email'])->firstOrFail();
-
-            $token = $user->createToken("login")->plainTextToken;
-
-            return response()->json([
-                'data' => [
-                    'access_token' => $token,
-                    'token_type' => 'Bearer',
-                ],
-            ]);
+        if (! Auth::attempt($request->only('email', 'password'))) {
+            return response()->json('Unauthorized', 401);
         }
+
+        $user = User::where('email', $request['email'])->firstOrFail();
+
+        $token = $user->createToken("login")->plainTextToken;
+
+        return response()->json([
+            'data' => [
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+            ],
+        ]);
+    }
 
 
 }
