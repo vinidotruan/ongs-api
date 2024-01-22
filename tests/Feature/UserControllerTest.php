@@ -3,8 +3,12 @@
 namespace Tests\Feature;
 
 use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Models\User;
+use App\Services\Users\UserCreationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Mockery;
+use Mockery\Mock;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
@@ -22,5 +26,6 @@ class UserControllerTest extends TestCase
 
         $response = $this->postJson('/api/register', $requestData);
         $response->assertStatus(200);
+        $this->assertEquals(1, User::count());
     }
 }

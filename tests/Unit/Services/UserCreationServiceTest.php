@@ -12,6 +12,12 @@ use PHPUnit\Framework\TestCase;
 
 class UserCreationServiceTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        Mockery::close();
+
+    }
 
     /** @test
      * @throws Exception
