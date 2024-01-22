@@ -2,12 +2,13 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
 use App\Models\Animal;
 use App\Models\Appointment;
+use App\Models\Customer;
 use App\Models\Ong;
 use App\Policies\AnimalPolicy;
 use App\Policies\AppointmentPolicy;
+use App\Policies\CustomerPolicy;
 use App\Policies\OngPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -21,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Animal::class => AnimalPolicy::class,
         Appointment::class => AppointmentPolicy::class,
+        Customer::class => CustomerPolicy::class,
         Ong::class => OngPolicy::class,
     ];
 
