@@ -8,59 +8,43 @@ use Illuminate\Auth\Access\Response;
 
 class ServiceProvidedPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, ServiceProvided $serviceProvided): bool
     {
-        //
+       return true;
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
     public function create(User $user): bool
     {
-        //
+        return $this->isOng($user);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
     public function update(User $user, ServiceProvided $serviceProvided): bool
     {
-        //
+        return $this->isOng($user);
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
     public function delete(User $user, ServiceProvided $serviceProvided): bool
     {
-        //
+        return $this->isOng($user);
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
     public function restore(User $user, ServiceProvided $serviceProvided): bool
     {
-        //
+        return $this->isOng($user);
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, ServiceProvided $serviceProvided): bool
     {
-        //
+        return $this->isOng($user);
+    }
+
+    private function isOng(User $user): bool
+    {
+        return !!$user->ong();
     }
 }

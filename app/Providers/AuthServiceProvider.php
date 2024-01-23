@@ -5,11 +5,15 @@ namespace App\Providers;
 use App\Models\Animal;
 use App\Models\Appointment;
 use App\Models\Customer;
+use App\Models\Employee;
 use App\Models\Ong;
+use App\Models\ServiceProvided;
 use App\Policies\AnimalPolicy;
 use App\Policies\AppointmentPolicy;
 use App\Policies\CustomerPolicy;
+use App\Policies\EmployeePolicy;
 use App\Policies\OngPolicy;
+use App\Policies\ServiceProvidedPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,7 +27,9 @@ class AuthServiceProvider extends ServiceProvider
         Animal::class => AnimalPolicy::class,
         Appointment::class => AppointmentPolicy::class,
         Customer::class => CustomerPolicy::class,
+        Employee::class => EmployeePolicy::class,
         Ong::class => OngPolicy::class,
+        ServiceProvided::class => ServiceProvidedPolicy::class,
     ];
 
     /**
