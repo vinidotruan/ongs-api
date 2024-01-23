@@ -19,11 +19,7 @@ class AppointmentPolicy
 
     public function view(User $user, Appointment $appointment): bool
     {
-        if($user->customer() && !$user->customer->appointments->contains($appointment->id)) {
-            return false;
-        }
-
-        return true;
+        return $this->isCostumerAndAppointmentNotBelongsToCustomer($user, $appointment);
     }
 
     public function create(User $user): bool
@@ -33,32 +29,25 @@ class AppointmentPolicy
 
     public function update(User $user, Appointment $appointment): bool
     {
-        if($user->customer() && !$user->customer->appointments->contains($appointment->id)) {
-            return false;
-        }
-
-        return true;
+        return $this->isCostumerAndAppointmentNotBelongsToCustomer($user, $appointment);
     }
 
     public function delete(User $user, Appointment $appointment): bool
     {
-        if($user->customer() && !$user->customer->appointments->contains($appointment->id)) {
-            return false;
-        }
-
-        return true;
+        return $this->isCostumerAndAppointmentNotBelongsToCustomer($user, $appointment);
     }
 
     public function restore(User $user, Appointment $appointment): bool
     {
-        if($user->customer() && !$user->customer->appointments->contains($appointment->id)) {
-            return false;
-        }
-
-        return true;
+        return $this->isCostumerAndAppointmentNotBelongsToCustomer($user, $appointment);
     }
 
     public function forceDelete(User $user, Appointment $appointment): bool
+    {
+        return $this->isCostumerAndAppointmentNotBelongsToCustomer($user, $appointment);
+    }
+
+    private function isCostumerAndAppointmentNotBelongsToCustomer(User $user, Appointment $appointment): bool
     {
         if($user->customer() && !$user->customer->appointments->contains($appointment->id)) {
             return false;
