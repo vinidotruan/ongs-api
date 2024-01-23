@@ -18,10 +18,8 @@ class CustomerPolicy
 
     public function view(User $user, Customer $customer): bool
     {
-        if($user->customer() && !$user->customer->id === $customer->id) {
-            return false;
-        }
-        return true;
+        return $this->isUserAuthorized($user, $customer);
+
     }
 
     public function create(User $user): bool
@@ -31,21 +29,12 @@ class CustomerPolicy
 
     public function update(User $user, Customer $customer): bool
     {
-        if($user->customer() && $user->customer->id === $customer->id) {
-            return true;
-        }
-
-        return false;
-
+        return $this->isUserAuthorized($user, $customer);
     }
 
     public function delete(User $user, Customer $customer): bool
     {
-        if($user->customer() && $user->customer->id === $customer->id) {
-            return true;
-        }
-
-        return false;
+        return $this->isUserAuthorized($user, $customer);
     }
 
     public function restore(User $user, Customer $customer): bool
@@ -55,6 +44,15 @@ class CustomerPolicy
 
     public function forceDelete(User $user, Customer $customer): bool
     {
+        return false;
+    }
+
+    private function isUserAuthorized(User $user, Customer $customer): bool
+    {
+        if($user->customer() && $user->customer->id === $customer->id) {
+            return true;
+        }
+
         return false;
     }
 }
