@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Employee::class);
     }
+
+    public function userType(): string {
+        if($this->ong()->exists()) {
+            return 'ong';
+        } else if($this->customer()->exists()) {
+            return 'customer';
+        } else if($this->employee()->exists()) {
+            return 'employee';
+        }
+    }
 }

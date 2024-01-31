@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Resources\AuthResource;
 use App\Models\User;
 use App\Services\Users\UserCreationService;
 use Exception;
@@ -10,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use mysql_xdevapi\Collection;
 
 class AuthController extends Controller
 {
@@ -53,7 +55,8 @@ class AuthController extends Controller
             'data' => [
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-            ],
+                'user_type' => $user->userType()
+            ]
         ]);
     }
 

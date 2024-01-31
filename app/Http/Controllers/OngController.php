@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 class OngController extends Controller
 {
-    public function __construct(private readonly OngsCreationService $ongsCreationService)
+    public function __construct(
+        private readonly OngsCreationService $ongsCreationService,
+    )
     { }
 
 
