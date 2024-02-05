@@ -31,6 +31,17 @@ class Employee extends Model
         return $this->belongsToMany(ServiceProvided::class, 'employee_service_provided', 'employee_id', 'service_provided_id')->withPivot('id');
     }
 
+    public function schedules(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Schedule::class,
+            EmployeeServiceProvided::class,
+            'employee_id',
+            'employee_service_id',
+            'id',
+            'id'
+        );
+    }
     public function appointments(): HasManyThrough
     {
         return $this->HasManyThrough(

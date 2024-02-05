@@ -13,7 +13,7 @@ class Appointment extends Model
 
     public function employeeServiceProvided(): BelongsTo
     {
-        return $this->belongsTo(EmployeeServiceProvided::class);
+        return $this->belongsTo(EmployeeServiceProvided::class, 'employee_service_id');
     }
 
     public function customer(): BelongsTo
@@ -24,5 +24,15 @@ class Appointment extends Model
     public function animal(): BelongsTo
     {
         return $this->belongsTo(Animal::class);
+    }
+
+    public function ong(): BelongsTo
+    {
+        return $this->belongsTo(Ong::class);
+    }
+
+    public function schedule(): BelongsTo
+    {
+        return $this->belongsTo(Schedule::class);
     }
 }

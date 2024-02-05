@@ -20,12 +20,14 @@ class AppointmentController extends Controller
 
         if($user->employee()->exists()) {
             $dataGetter = $user->employee;
-        } else {
+        } else if($user->customer()->exists()) {
             $dataGetter = $user->customer;
+        } else {
+            $dataGetter = $user->ong;
         }
 
         return response()->json([
-            'data' => $dataGetter->appointments()->with(['animal'])->get()
+            'data' => $dataGetter->appointments()->with(['animal', 'schedule', 'employeeServiceProvided.employee', 'employeeServiceProvided.serviceProvided'])->get()
         ]);
     }
 

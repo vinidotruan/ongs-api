@@ -24,4 +24,8 @@ class Ong extends Model
         return $this->hasMany(Employee::class);
     }
 
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

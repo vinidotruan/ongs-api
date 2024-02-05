@@ -7,6 +7,7 @@ use App\Http\Requests\Employees\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Services\Employees\EmployeeCreationService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class EmployeeController extends Controller
 {
@@ -16,6 +17,7 @@ class EmployeeController extends Controller
 
     public function index(): JsonResponse
     {
+        Log::info('Trying get employees from ong: ' . auth()->user()->ong->id);
         return response()->json([
             'data' => auth()->user()->ong->employees
         ]);

@@ -26,6 +26,8 @@ class StoreAppointmentRequest extends FormRequest
             "employee_service_id" => ["required", "exists:employee_service_provided,id"],
             "customer_id" => ["required", "exists:customers,id"],
             "animal_id" => ["required", "exists:animals,id"],
+            "ong_id" => ["required", "exists:ongs,id"],
+            "schedule_id" => ["required", "exists:schedules,id"],
         ];
     }
 }
