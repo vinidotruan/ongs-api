@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             CustomerSeeder::class,
             AnimalSeeder::class,
+            ContractSeeder::class,
             ScheduleSeeder::class,
         ]);
     }

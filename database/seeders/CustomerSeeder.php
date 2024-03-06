@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,11 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        Customer::factory()->create();
+        Customer::create([
+            "name" => "Customer Test",
+            "cpf" => "12345678901",
+            "whatsapp" => "12345678901",
+            "user_id" => User::where(['email' => 'cliente@teste.com'])->first()->id,
+        ]);
     }
 }

@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
-use App\Models\ServiceProvided;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Ong;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class EmployeeSeeder extends Seeder
@@ -14,11 +14,10 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-      Employee::factory()
-          ->count(1)
-          ->create();
-
-      $e = Employee::first();
-      $e->servicesProvided()->attach(ServiceProvided::first());
+      $e = Employee::create([
+          "name" => "Empregado Teste",
+          "user_id" => User::where(['email' => "funcionario@teste.com"])->first()->id,
+          "cpf" => "12345678901",
+      ]);
     }
 }

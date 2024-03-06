@@ -3,16 +3,20 @@
 namespace Database\Seeders;
 
 use App\Models\Animal;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Customer;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Date;
 
 class AnimalSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Animal::factory()->create();
+        Animal::factory()->create([
+            "name" => "Zezinho",
+            "breed" => "Cachorro",
+            "birthday" => Date::today(),
+            "weight" => 23.4,
+            "customer_id" => Customer::first()->id
+        ]);
     }
 }

@@ -22,7 +22,12 @@ class Schedule extends Model
 
     public function employee(): HasOneThrough
     {
-        return $this->hasOneThrough(Employee::class, EmployeeServiceProvided::class);
+        return $this->hasOneThrough(Employee::class, Contract::class);
+    }
+
+    public function contract(): BelongsTo
+    {
+        return $this->belongsTo(Contract::class);
     }
 
     public function end(): Attribute

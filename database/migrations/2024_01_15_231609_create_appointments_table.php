@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId("customer_id")->constrained("customers");
             $table->foreignId("animal_id")->constrained("animals");
-            $table->foreignId("employee_service_id")->constrained("employee_service_provided");
-            $table->foreignId("ong_id")->constrained("ongs");
             $table->foreignId("schedule_id")->constrained("schedules");
             $table->timestamps();
         });

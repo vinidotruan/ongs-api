@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->dateTime("start");
-            $table->unsignedInteger("duration");
+            $table->foreignId('ong_id')->constrained('ongs');
+            $table->foreignId('employee_id')->constrained('employees');
+            $table->foreignId('service_provided_id')->constrained('services_provided');
+            $table->unique(['ong_id', 'employee_id', 'service_provided_id']);
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('contracts');
     }
 };

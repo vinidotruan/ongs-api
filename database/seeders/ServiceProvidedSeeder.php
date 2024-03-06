@@ -13,6 +13,8 @@ class ServiceProvidedSeeder extends Seeder
      */
     public function run(): void
     {
-        ServiceProvided::factory()->count(3)->create();
+        ServiceProvided::create(["name"=>"Vacinacao"]);
+        ServiceProvided::create(["name"=>"Castracao"]);
+        ServiceProvided::create(["name"=>"Check-up"]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\EmployeeServiceProvided;
 use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +20,7 @@ class ScheduleFactory extends Factory
         return [
             "start" => $this->faker->dateTime(),
             "duration" => $this->faker->randomDigitNotNull(),
-            "employee_service_id" => EmployeeServiceProvided::first(),
+
         ];
     }
 }

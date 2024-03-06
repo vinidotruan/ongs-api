@@ -18,7 +18,7 @@ class OngController extends Controller
 
     public function index(): JsonResponse
     {
-        return response()->json(Ong::all());
+        return response()->json(["data" => Ong::all()]);
     }
 
 
@@ -50,5 +50,10 @@ class OngController extends Controller
     public function destroy(Ong $ong)
     {
         //
+    }
+
+    public function servicesProvided(Ong $ong): JsonResponse
+    {
+        return response()->json(["data" => $ong->servicesProvided()->get()]);
     }
 }

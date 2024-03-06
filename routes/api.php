@@ -24,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function() {
         'services-provided' => ServiceProvidedController::class,
     ]);
 
+    Route::get('ongs/{ong}/services-provided', [OngController::class, 'servicesProvided']);
+
     Route::post('services-provided/{serviceProvided}/employees/{employee}', [ServiceProvidedController::class, 'addEmployee']);
     Route::apiResource('customers', CustomerController::class)->except(['store']);;
 });

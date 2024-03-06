@@ -14,11 +14,10 @@ class OngSeeder extends Seeder
      */
     public function run(): void
     {
-        Ong::factory()
-            ->count(1)
-            ->create();
-
-        $user = User::first();
-        $user->ong()->save(Ong::first());
+        Ong::factory()->create([
+            'name' => 'Ong Teste',
+            'email' => "ong@teste.com",
+            'user_id' => User::where(['email' => 'ong@teste.com'])->first()->id,
+        ]);
     }
 }

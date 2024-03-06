@@ -12,45 +12,42 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class Employee extends Model
 {
     use HasFactory;
-    protected $with = ['servicesProvided'];
 
     protected $guarded = ['id'];
+    protected $with = ['servicesProvided', 'schedules'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function ong(): BelongsTo
+    public function ongs():BelongsToMany
     {
-        return $this->belongsTo(Ong::class);
+        return $this->belongsToMany(
+            Ong::class,
+            'contracts',
+            'employee_id',
+            'ong_id');
     }
 
     public function servicesProvided(): BelongsToMany
     {
-        return $this->belongsToMany(ServiceProvided::class, 'employee_service_provided', 'employee_id', 'service_provided_id')->withPivot('id');
+        return $this->belongsToMany(ServiceProvided::class,
+            'contracts',
+            'employee_id',
+            'service_provided_id');
+    }
+
+    public function contract(): HasMany
+    {
+        return $this->hasMany(Contract::class);
     }
 
     public function schedules(): HasManyThrough
     {
         return $this->hasManyThrough(
             Schedule::class,
-            EmployeeServiceProvided::class,
-            'employee_id',
-            'employee_service_id',
-            'id',
-            'id'
-        );
-    }
-    public function appointments(): HasManyThrough
-    {
-        return $this->HasManyThrough(
-            Appointment::class,
-            EmployeeServiceProvided::class,
-            'employee_id',
-            'employee_service_id',
-            'id',
-            'id'
+            Contract::class,
         );
     }
 }
